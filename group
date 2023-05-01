@@ -1,0 +1,34 @@
+@@ -12,7 +12,7 @@ steps:
+      buf breaking --against ".git#ref=`git merge-base origin/master HEAD`"
+    agents:
+      - "queue=gcp-standard"
+      - "distro=amazonlinux"
+
+  - label: "cargo test integration-tests*"
+    command: |
+@@ -21,7 +21,7 @@ steps:
+      cargo nextest run --locked -p 'integration-tests'
+    agents:
+      - "queue=gcp-standard"
+      - "distro=amazonlinux"
+    branches: "!master"
+
+  - label: "cargo test not integration-tests*"
+@@ -31,7 +31,7 @@ steps:
+      cargo nextest run --locked --workspace -p '*' --exclude 'integration-tests*'
+    agents:
+      - "queue=gcp-standard"
+      - "distro=amazonlinux"
+    branches: "!master"
+
+  - label: "cargo test nightly integration-tests*"
+@@ -41,7 +41,7 @@ steps:
+      cargo nextest run --features nightly,test_features -p 'integration-tests'
+    agents:
+      - "queue=gcp-standard"
+      - "distro=amazonlinux"
+    branches: "!master"
+
+  - label: "cargo test nightly not integration-tests*"
+@@ -52,7 +52,7 @@ steps:
+      cargo test --doc
